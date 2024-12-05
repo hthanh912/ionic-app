@@ -1,14 +1,12 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      <!-- {{ books.length }}  -->
+    <ion-title *ngIf="books$ | async as books"> 
+      Total: {{ books.length }} 
     </ion-title>
-    <!-- <ion-title *ngIf="campaign$ | async as campaign" mode="md">{{ campaign.campaign_name }}</ion-title> -->
-
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" (ionRefresh)="refresh($event)">
   <ion-refresher slot="fixed">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
@@ -21,21 +19,13 @@
     </ion-toolbar>
   </ion-header>
   
-  <!-- <ion-list *ngIf="books$ | async as books">
-    <ion-item *ngFor="let book of books">
-      <ion-label>
-        <h2>{{ book.title }}</h2>
-      </ion-label>
-    </ion-item>
-  </ion-list> -->
+  <ion-list>
+    <!-- Loop over the books and display each one using BookItemComponent -->
+    <app-book-item *ngFor="let book of books$ | async" [book]="book"></app-book-item>
+  </ion-list>
+  
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadMoreBooks($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>
-
-
-<!-- <div *ngIf="books$ | async as books">
-  <div *ngFor="let book of books">
-    <h2>{{ book.title }}</h2>
-    <img [src]="book.imageUrl" alt="{{ book.title }}">
-    <p>Average Rating: {{ book.averageRating }}</p>
-    <p>Ratings Count: {{ book.ratingsCount }}</p>
-  </div>
-</div> -->

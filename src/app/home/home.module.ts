@@ -7,6 +7,7 @@ import { HomePage } from './home.page';
 import { HomePageRoutingModule } from './home-routing.module';
 import { MessageComponentModule } from '../message/message.module';
 import { BookService } from '../services';
+import { BookItemComponent } from './components/book-item/book-item.component';
 
 @NgModule({
   imports: [
@@ -15,6 +16,7 @@ import { BookService } from '../services';
     IonicModule,
     MessageComponentModule,
     HomePageRoutingModule,
+    BookItemComponent
   ],
   declarations: [HomePage],
   providers: [BookService]

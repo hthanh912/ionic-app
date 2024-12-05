@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, Input, OnInit } from '@angular/core';
+import { IonItem, IonLabel, IonThumbnail, IonicModule } from '@ionic/angular';
 import { IonCard, IonCardHeader, IonCardContent, IonCardSubtitle, IonCardTitle } from '@ionic/angular/standalone';
+import { BookItem } from 'src/app/models';
 
 
 @Component({
@@ -7,20 +10,18 @@ import { IonCard, IonCardHeader, IonCardContent, IonCardSubtitle, IonCardTitle }
   templateUrl: './book-item.component.html',
   styleUrls: ['./book-item.component.scss'],
   imports: [
+    CommonModule,
+    IonicModule,
     IonCard,
     IonCardHeader,
     IonCardContent,
     IonCardSubtitle,
-    IonCardTitle
   ],
   standalone: true
 })
-export class BookItemComponent  implements OnInit {
+export class BookItemComponent {
+  @Input() book: BookItem | null = null; // Input property to receive BookItem object
 
   constructor() { }
-
-  ngOnInit() {
-    console.log("ngOnInit")
-  }
 
 }

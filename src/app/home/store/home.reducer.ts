@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import {loadBooks, loadBooksSuccess, loadBooksFailure} from './home.actions';
+import { loadBooks, loadBooksSuccess, loadBooksFailure } from './home.actions';
 import { BookItem } from 'src/app/models';
 
 export interface HomeState {
@@ -14,10 +14,10 @@ export const initialState: HomeState = {
 
 export const homeReducer = createReducer(
     initialState,
-    on(loadBooksSuccess, (state, newState) => { 
-        console.log("Books loaded successfully", newState);
-        console.warn("state " + newState)
-        return { ...state, books: newState.items } }),
+    on(loadBooksSuccess, (state, { items }) => { 
+        console.log("reducer loadBooksSuccess")
+        return { ...state, books: items } }),
     on(loadBooksFailure, (state, { error }) => { 
+        console.log("reducer loadBooksFailure")
         return ({ ...state, error }) } )
 );

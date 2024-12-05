@@ -1,6 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { RefresherCustomEvent } from '@ionic/angular';
-import { MessageComponent } from '../message/message.component';
 import { BookItem } from '../models'
 
 import { DataService, Message } from '../services/data.service';
@@ -16,15 +15,8 @@ import { HomeState, selectBooks } from './store';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit {
-  private data = inject(DataService);
-
   books$: Observable<BookItem[]>
-
-  // booksLength$: Observable<number> = this.books$.pipe(
-  //   map(books => {
-  //     console.log("books " + books)
-  //     return books.length})
-  // ) || 0;
+  page: number = 0
 
   constructor(private store: Store<HomeState>) {
     this.books$ = this.store.select(selectBooks);
@@ -32,18 +24,15 @@ export class HomePage implements OnInit {
   
   ngOnInit(): void {
     console.log("OnInit")
-    this.store.dispatch(loadBooks())
+    this.store.dispatch(loadBooks({page: this.page}))
   }
 
-  // refresh(ev: any) {
-  //   setTimeout(() => {
-  //     (ev as RefresherCustomEvent).detail.complete();
-  //   }, 3000);
-  // }
+  refresh(ev: any) {
+    this.store.dispatch(loadBooks({page: this.page}));
+    (ev as RefresherCustomEvent).detail.complete();
+  }
 
-  // getMessages(): Message[] {
-  //   console.log("getMessages")
-  //   // this.getBooks();
-  //   return this.data.getMessages();
-  // }
+  loadMoreBooks(ev: any) {
+    console.log('load more')
+  }
 }

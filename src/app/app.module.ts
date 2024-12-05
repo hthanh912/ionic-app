@@ -10,7 +10,7 @@ import { combineReducers, StoreModule } from '@ngrx/store';
 import { homeReducer } from './home/store/home.reducer';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { EffectsModule } from '@ngrx/effects';
-import { ItemsEffects } from './home/store/home-effects';
+import { ItemsEffects } from './home/store/home.effects';
 
 
 export const reducer = combineReducers({
@@ -19,8 +19,13 @@ export const reducer = combineReducers({
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, StoreModule.forRoot(reducer), HttpClientModule,
-        EffectsModule.forRoot([ItemsEffects])
+  imports: [
+    BrowserModule, IonicModule.forRoot(), 
+    AppRoutingModule, StoreModule.forRoot({
+      home: homeReducer
+    }), 
+    HttpClientModule,
+    EffectsModule.forRoot([ItemsEffects]),
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],

@@ -11,7 +11,7 @@ export class ApiService {
     constructor(private httpClient: HttpClient) {}
 
     get<T>(request: ApiRequest): Observable<T> {
-        const url = `${BASE_API_URL}/${request.uri.replace('/', '')}`;
+        const url = `${BASE_API_URL}/${request.uri}`;
         return this.httpClient.get<T>(url, request.headers);
       }
 }
