@@ -4,10 +4,11 @@ import { MessageComponent } from '../message/message.component';
 import { BookItem } from '../models'
 
 import { DataService, Message } from '../services/data.service';
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 import { AppState } from '@capacitor/app';
 import { loadBooks } from './store/home.actions';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
+import { HomeState, selectBooks } from './store';
 
 @Component({
   selector: 'app-home',
@@ -17,32 +18,32 @@ import { Observable } from 'rxjs';
 export class HomePage implements OnInit {
   private data = inject(DataService);
 
+  books$: Observable<BookItem[]>
 
-  // books$: Observable<BookItem[]>;
+  // booksLength$: Observable<number> = this.books$.pipe(
+  //   map(books => {
+  //     console.log("books " + books)
+  //     return books.length})
+  // ) || 0;
 
-  constructor(private store: Store<AppState>) {
-    // this.books$ = this.store.select()
+  constructor(private store: Store<HomeState>) {
+    this.books$ = this.store.select(selectBooks);
   }
   
   ngOnInit(): void {
     console.log("OnInit")
-  }
-  refresh(ev: any) {
-    setTimeout(() => {
-      (ev as RefresherCustomEvent).detail.complete();
-    }, 3000);
+    this.store.dispatch(loadBooks())
   }
 
-  getMessages(): Message[] {
-    console.log("getMessages")
-    // this.getBooks();
-    return this.data.getMessages();
-  }
+  // refresh(ev: any) {
+  //   setTimeout(() => {
+  //     (ev as RefresherCustomEvent).detail.complete();
+  //   }, 3000);
+  // }
 
-  getBooks(): BookItem[] {
-    console.log("getBooks")
-    // this.store.dispatch(loadBooks())
-    return []
-  }
-
+  // getMessages(): Message[] {
+  //   console.log("getMessages")
+  //   // this.getBooks();
+  //   return this.data.getMessages();
+  // }
 }

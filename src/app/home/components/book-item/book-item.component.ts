@@ -12,12 +12,15 @@ import { IonCard, IonCardHeader, IonCardContent, IonCardSubtitle, IonCardTitle }
     IonCardContent,
     IonCardSubtitle,
     IonCardTitle
-  ]
+  ],
+  standalone: true
 })
 export class BookItemComponent  implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log("ngOnInit")
+  }
 
 }
