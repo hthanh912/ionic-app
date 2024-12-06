@@ -4,10 +4,11 @@ import { BookItem } from '../models'
 
 import { DataService, Message } from '../services/data.service';
 import { select, Store } from '@ngrx/store';
-import { AppState } from '@capacitor/app';
 import { loadBooks } from './store/home.actions';
-import { map, Observable } from 'rxjs';
+import { map, Observable, Subscription } from 'rxjs';
 import { HomeState, selectBooks } from './store';
+import { selectIsFetching } from '../store';
+import { AppState } from '../store/app.reducer';
 
 @Component({
   selector: 'app-home',
@@ -15,16 +16,20 @@ import { HomeState, selectBooks } from './store';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit {
+  page = 0
+  isFetching = false
   books$: Observable<BookItem[]>
-  page: number = 0
+  isFetching$: Observable<boolean>;
 
-  constructor(private store: Store<HomeState>) {
+  constructor(private appStore: Store<AppState>, private store: Store<HomeState>) {
     this.books$ = this.store.select(selectBooks);
+    this.isFetching$ = this.appStore.select(selectIsFetching)
   }
   
   ngOnInit(): void {
     console.log("OnInit")
-    this.store.dispatch(loadBooks({page: this.page}))
+    this.isFetching$.subscribe(value => this.isFetching = value)
+    this.loadMoreBooks()
   }
 
   refresh(ev: any) {
@@ -32,7 +37,18 @@ export class HomePage implements OnInit {
     (ev as RefresherCustomEvent).detail.complete();
   }
 
-  loadMoreBooks(ev: any) {
-    console.log('load more')
+  loadMoreBooks(ev?: any) {
+    if (this.isFetching == true) return
+
+    this.store.dispatch(loadBooks({page: this.page}))
+    this.page ++
+    if (ev) {
+      this.books$.subscribe(items => {
+        if (items.length === 0) {
+          ev.target.disabled = true;
+        }
+        ev.target.complete();
+      });
+    }
   }
 }

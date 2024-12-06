@@ -20,7 +20,6 @@
   </ion-header>
   
   <ion-list>
-    <!-- Loop over the books and display each one using BookItemComponent -->
     <app-book-item *ngFor="let book of books$ | async" [book]="book"></app-book-item>
   </ion-list>
   

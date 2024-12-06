@@ -16,7 +16,7 @@ export const homeReducer = createReducer(
     initialState,
     on(loadBooksSuccess, (state, { items }) => { 
         console.log("reducer loadBooksSuccess")
-        return { ...state, books: items } }),
+        return { ...state, books: [...state.books, ...items] } }),
     on(loadBooksFailure, (state, { error }) => { 
         console.log("reducer loadBooksFailure")
         return ({ ...state, error }) } )

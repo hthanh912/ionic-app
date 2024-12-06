@@ -11,18 +11,15 @@ import { homeReducer } from './home/store/home.reducer';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { EffectsModule } from '@ngrx/effects';
 import { ItemsEffects } from './home/store/home.effects';
-
-
-export const reducer = combineReducers({
-  home: homeReducer
-});
+import { appReducer } from './store/app.reducer';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
     BrowserModule, IonicModule.forRoot(), 
     AppRoutingModule, StoreModule.forRoot({
-      home: homeReducer
+      app: appReducer,
+      home: homeReducer,
     }), 
     HttpClientModule,
     EffectsModule.forRoot([ItemsEffects]),
