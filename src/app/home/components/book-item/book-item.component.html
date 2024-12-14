@@ -1,7 +1,5 @@
 <ion-item *ngIf="book">
-  <ion-thumbnail slot="start">
-    <img [src]="book.imageUrl" alt="{{ book.title }}" />
-  </ion-thumbnail>
+  <img [src]="book.imageUrl" alt="{{ book.title }}" />
   <ion-label>
     <h2>{{ book.title }}</h2>
     <p>Average Rating: {{ book.averageRating }} ({{ book.ratingsCount }} ratings)</p>

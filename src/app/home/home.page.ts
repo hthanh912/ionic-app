@@ -4,7 +4,7 @@ import { BookItem } from '../models'
 
 import { DataService, Message } from '../services/data.service';
 import { select, Store } from '@ngrx/store';
-import { loadBooks } from './store/home.actions';
+import { loadBooks, clearBooks } from './store/home.actions';
 import { map, Observable, Subscription } from 'rxjs';
 import { HomeState, selectBooks } from './store';
 import { selectIsFetching } from '../store';
@@ -33,22 +33,20 @@ export class HomePage implements OnInit {
   }
 
   refresh(ev: any) {
+    this.page = 0;
+    this.store.dispatch(clearBooks());
     this.store.dispatch(loadBooks({page: this.page}));
+    this.page ++;
     (ev as RefresherCustomEvent).detail.complete();
   }
 
   loadMoreBooks(ev?: any) {
-    if (this.isFetching == true) return
-
-    this.store.dispatch(loadBooks({page: this.page}))
-    this.page ++
-    if (ev) {
-      this.books$.subscribe(items => {
-        if (items.length === 0) {
-          ev.target.disabled = true;
-        }
-        ev.target.complete();
-      });
-    }
+    console.log("loadMoreBooks")
+    setTimeout(() => {
+      if (this.isFetching == true) return
+      this.store.dispatch(loadBooks({page: this.page}))
+      this.page ++
+      ev.target.complete();
+    }, 500)
   }
 }
