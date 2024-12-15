@@ -46,7 +46,7 @@ export class HomePage implements OnInit {
       if (this.isFetching == true) return
       this.store.dispatch(loadBooks({page: this.page}))
       this.page ++
-      ev.target.complete();
+      ev?.target?.complete();
     }, 500)
   }
 }

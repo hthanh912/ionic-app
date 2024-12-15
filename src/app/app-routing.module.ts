@@ -16,7 +16,7 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'book',
+    path: 'book/:id',
     loadChildren: () => import('./book/book.module').then( m => m.BookPageModule)
   },
 ];

@@ -1,4 +1,4 @@
-<ion-item *ngIf="book">
+<ion-item *ngIf="book" [routerLink]="'/book/' + book.id">
   <img [src]="book.imageUrl" alt="{{ book.title }}" />
   <ion-label>
     <h2>{{ book.title }}</h2>

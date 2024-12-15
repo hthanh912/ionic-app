@@ -12,6 +12,8 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { EffectsModule } from '@ngrx/effects';
 import { ItemsEffects } from './home/store/home.effects';
 import { appReducer } from './store/app.reducer';
+import { detailReducer } from './book/store/book.reducer'
+import { DetailEffects } from './book/store/book.effects'
 
 @NgModule({
   declarations: [AppComponent],
@@ -20,9 +22,10 @@ import { appReducer } from './store/app.reducer';
     AppRoutingModule, StoreModule.forRoot({
       app: appReducer,
       home: homeReducer,
+      book: detailReducer,
     }), 
     HttpClientModule,
-    EffectsModule.forRoot([ItemsEffects]),
+    EffectsModule.forRoot([ItemsEffects, DetailEffects]),
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],

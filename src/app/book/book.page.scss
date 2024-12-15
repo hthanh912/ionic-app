@@ -1,0 +1,19 @@
+.loading-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full height of the viewport */
+    width: 100vw;  /* Full width of the viewport */
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;  /* Ensures the spinner is on top of other content */
+}
+.book-image {
+    width: 100%;
+    max-width: 200px;
+    height: auto;
+    margin: 10px 0;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}

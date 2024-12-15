@@ -3,14 +3,44 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>book</ion-title>
+    <ion-title>Detail</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">book</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content *ngIf="(isFetching$ | async) === false; else loading">
+  <ion-content *ngIf="bookDetail; else error">
+    <ion-card-header>
+      <ion-card-title>{{ bookDetail.title }}</ion-card-title>
+      <ion-card-subtitle>{{ bookDetail.publisher }}</ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-item>
+        <ion-label position="stacked">Description</ion-label>
+        <p>{{ bookDetail.description }}</p>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Publish Date</ion-label>
+        <p>{{ bookDetail.publishDate | date: 'longDate' }}</p>
+      </ion-item>
+
+      <ion-item *ngIf="bookDetail.imageUrl">
+        <ion-label position="stacked">Image</ion-label>
+        <img [src]="bookDetail.imageUrl" [alt]="bookDetail.title" class="book-image" />
+      </ion-item>
+    </ion-card-content>
+  </ion-content>
 </ion-content>
+
+<ng-template #loading>
+  <div class="loading-container">
+    <ion-spinner name="crescent"></ion-spinner>
+  </div>
+</ng-template>
+
+<ng-template #error>
+  <div class="loading-container">
+    <ion-card-title>Not found</ion-card-title>
+  </div>
+</ng-template>
