@@ -2,8 +2,6 @@ import { BookItem } from "src/app/models";
 import { ApiService } from "../http/api.service";
 import { Observable } from "rxjs";
 import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
-
 
 export interface BooksParam {
     page: number,
@@ -14,9 +12,8 @@ export interface BooksParam {
 })
 export class BookService {
     constructor(private apiService: ApiService) {}
-    
 
     public getBooks(param: BooksParam): Observable<BookItem[]> {
-        return this.apiService.get<BookItem[]>({uri: `books?page=${param.page}`})
+        return this.apiService.get<BookItem[]>({uri: `books?page=${param.page}&sort=ratingsCount,desc`})
     }
 }

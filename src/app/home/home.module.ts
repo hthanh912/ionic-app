@@ -8,6 +8,7 @@ import { HomePageRoutingModule } from './home-routing.module';
 import { MessageComponentModule } from '../message/message.module';
 import { BookService } from '../services';
 import { BookItemComponent } from './components/book-item/book-item.component';
+import { BookItemComponentModule } from './components/book-item/book-item.module';
 
 @NgModule({
   imports: [
@@ -16,7 +17,7 @@ import { BookItemComponent } from './components/book-item/book-item.component';
     IonicModule,
     MessageComponentModule,
     HomePageRoutingModule,
-    BookItemComponent
+    BookItemComponentModule
   ],
   declarations: [HomePage],
   providers: [BookService]

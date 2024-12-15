@@ -9,15 +9,15 @@ import { BookItem } from 'src/app/models';
   selector: 'app-book-item',
   templateUrl: './book-item.component.html',
   styleUrls: ['./book-item.component.scss'],
-  imports: [
-    CommonModule,
-    IonicModule,
-    IonCard,
-    IonCardHeader,
-    IonCardContent,
-    IonCardSubtitle,
-  ],
-  standalone: true
+  // imports: [
+  //   CommonModule,
+  //   IonicModule,
+  //   IonCard,
+  //   IonCardHeader,
+  //   IonCardContent,
+  //   IonCardSubtitle,
+  // ],
+  // standalone: true
 })
 export class BookItemComponent {
   @Input() book: BookItem | null = null; // Input property to receive BookItem object
