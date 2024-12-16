@@ -15,9 +15,9 @@
     </ion-card-header>
 
     <ion-card-content>
-      <ion-item>
-        <ion-label position="stacked">Description</ion-label>
-        <p>{{ bookDetail.description }}</p>
+      <ion-item *ngIf="bookDetail.imageUrl">
+        <ion-label position="stacked">Image</ion-label>
+        <img [src]="bookDetail.imageUrl" [alt]="bookDetail.title" class="book-image" />
       </ion-item>
 
       <ion-item>
@@ -25,10 +25,11 @@
         <p>{{ bookDetail.publishDate | date: 'longDate' }}</p>
       </ion-item>
 
-      <ion-item *ngIf="bookDetail.imageUrl">
-        <ion-label position="stacked">Image</ion-label>
-        <img [src]="bookDetail.imageUrl" [alt]="bookDetail.title" class="book-image" />
+      <ion-item>
+        <ion-label position="stacked">Description</ion-label>
+        <p>{{ bookDetail.description }}</p>
       </ion-item>
+
     </ion-card-content>
   </ion-content>
 </ion-content>

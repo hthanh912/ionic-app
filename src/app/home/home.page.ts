@@ -2,10 +2,9 @@ import { Component, inject, OnInit } from '@angular/core';
 import { RefresherCustomEvent } from '@ionic/angular';
 import { BookItem } from '../models'
 
-import { DataService, Message } from '../services/data.service';
 import { select, Store } from '@ngrx/store';
 import { loadBooks, clearBooks } from './store/home.actions';
-import { map, Observable, Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 import { HomeState, selectBooks } from './store';
 import { selectIsFetching } from '../store';
 import { AppState } from '../store/app.reducer';
