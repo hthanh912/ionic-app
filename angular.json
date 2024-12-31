@@ -81,6 +81,11 @@
             },
             "ci": {
               "progress": false
+            },
+            "options": {
+              "host": "www.w3schools.com",
+              "port": 80,
+              "ssl": true
             }
           },
           "defaultConfiguration": "development"

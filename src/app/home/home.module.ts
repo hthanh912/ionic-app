@@ -7,6 +7,7 @@ import { HomePage } from './home.page';
 import { HomePageRoutingModule } from './home-routing.module';
 import { BookService } from '../services';
 import { BookItemComponentModule } from './components/book-item/book-item.module';
+import { WindowRef } from '../utils/windowsRef';
 
 @NgModule({
   imports: [
@@ -17,6 +18,6 @@ import { BookItemComponentModule } from './components/book-item/book-item.module
     BookItemComponentModule
   ],
   declarations: [HomePage],
-  providers: [BookService]
+  providers: [BookService, WindowRef]
 })
 export class HomePageModule {}

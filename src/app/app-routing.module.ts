@@ -15,6 +15,10 @@ const routes: Routes = [
     path: 'book/:id',
     loadChildren: () => import('./book/book.module').then( m => m.BookPageModule)
   },
+  {
+    path: 'login',
+    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+  },
 ];
 
 @NgModule({
