@@ -11,6 +11,7 @@ import { AppState } from '../store/app.reducer';
 import { ScriptService } from '../services/script/script.service';
 import { WindowRef } from '../utils/windowsRef';
 
+
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -30,8 +31,11 @@ export class HomePage implements OnInit {
   ngOnInit(): void {
     console.log("OnInit")
     this.scriptService.loadJsScript(this.renderer, 
-      // 'https://manulife-vietnam--vnccs2.sandbox.my.site.com/ESWPOCChatBotEmbeddedS1723178841887/assets/js/bootstrap.min.js', this.initEmbeddedMessaging.bind(this));
-      'lib/js/jquery.min.js', this.initEmbeddedMessaging.bind(this));
+      'http://localhost:4200/assets/js/script.js', this.initEmbeddedMessaging.bind(this));
+
+    // this.scriptService.loadJsScript(this.renderer, 
+    //   'https://manulife-vietnam--vnccs2.sandbox.my.site.com/ESWPOCChatBotEmbeddedS1723178841887/assets/js/bootstrap.min.js', this.initEmbeddedMessaging.bind(this));
+      // 'lib/js/jquery.min.js', this.initEmbeddedMessaging.bind(this));
 
     // 'https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js', this.initEmbeddedMessaging.bind(this)
     // lib/js/jquery.min.js
@@ -46,16 +50,18 @@ export class HomePage implements OnInit {
     // Your initialization code here
     console.log('Embedded messaging initialized', this.windowRef.nativeWindow);
 
-    this.windowRef.nativeWindow.embeddedservice_bootstrap.settings.language = 'en_US'; // For example, enter 'en' or 'en-US'
-    this.windowRef.nativeWindow.embeddedservice_bootstrap.settings.needQueuePosition = 1;
-    this.windowRef.nativeWindow.embeddedservice_bootstrap.init(
-      '00D0p0000002OHx',
-      'POC_ChatBot_Embedded_Service',
-      'https://manulife-vietnam--vnccs2.sandbox.my.site.com/ESWPOCChatBotEmbeddedS1723178841887',
-      {
-        scrt2URL: 'https://manulife-vietnam--vnccs2.sandbox.my.salesforce-scrt.com'
-      }
-    );
+    this.windowRef.nativeWindow.showAlert();
+
+    // this.windowRef.nativeWindow.embeddedservice_bootstrap.settings.language = 'en_US'; // For example, enter 'en' or 'en-US'
+    // this.windowRef.nativeWindow.embeddedservice_bootstrap.settings.needQueuePosition = 1;
+    // this.windowRef.nativeWindow.embeddedservice_bootstrap.init(
+    //   '00D0p0000002OHx',
+    //   'POC_ChatBot_Embedded_Service',
+    //   'https://manulife-vietnam--vnccs2.sandbox.my.site.com/ESWPOCChatBotEmbeddedS1723178841887',
+    //   {
+    //     scrt2URL: 'https://manulife-vietnam--vnccs2.sandbox.my.salesforce-scrt.com'
+    //   }
+    // );
 
     console.log("done")
   }
